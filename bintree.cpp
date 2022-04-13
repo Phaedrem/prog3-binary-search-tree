@@ -35,30 +35,40 @@ void BinTree::clear(DataNode* localRoot){
     root = nullptr;
 }
 
-bool BinTree::addNode(DataNode* info, DataNode** root){
+bool BinTree::addNode(DataNode* newNode, DataNode** localRoot){
     bool added = false;
+    if(!(*localRoot)){
+        *localRoot = newNode;
+        added = true;
+    }else{
+        if(newNode->data.id < (*localRoot)->data.id){
+            addNode(newNode, &(*localRoot)->left);
+        }else if(newNode->data.id > (*localRoot)->data.id){
+            addNode(newNode, &(*localRoot)->right);
+        }
+    }
     return added;
 }
 
-DataNode* BinTree::removeNode(int id, DataNode* root){
+DataNode* BinTree::removeNode(int id, DataNode* localRoot){
     return 0;
 }
 
-bool BinTree::getNode(Data* dataBox, int id, DataNode* root){
+bool BinTree::getNode(Data* dataBox, int id, DataNode* localRoot){
     bool found = false;
     return found;
 }
 
-bool BinTree::contains(int id, DataNode* root){
+bool BinTree::contains(int id, DataNode* localRoot){
     bool found = false;
     return found; 
 }
 
-int BinTree::getHeight(DataNode* root){
+int BinTree::getHeight(DataNode* localRoot){
     return 0;
 }
 
-void BinTree::displayPreOrder(DataNode* root){
+void BinTree::displayPreOrder(DataNode* localRoot){
 
 }
 
@@ -74,7 +84,7 @@ void BinTree::displayInOrder(DataNode* localRoot){
     }
 }
 
-void BinTree::displayPostOrder(DataNode* root){
+void BinTree::displayPostOrder(DataNode* localRoot){
 
 }
 
@@ -112,7 +122,7 @@ bool BinTree::getRootData(Data* emptyData){
 }
 
 void BinTree::displayTree(){
-    
+
 }
 
 void BinTree::clear(){
@@ -123,6 +133,17 @@ void BinTree::clear(){
 
 bool BinTree::addNode(int id, const string* info){
     bool added = false;
+    if(id > 0 && *info != ""){
+        DataNode *newNode = new DataNode;
+        newNode->data.id = id;
+        newNode->data.information = *info;
+        newNode->left = nullptr;
+        newNode->right = nullptr;
+        if(addNode(newNode, &root)){
+            count++;
+            added = true;
+        }
+    }
     return added;
 }
 
