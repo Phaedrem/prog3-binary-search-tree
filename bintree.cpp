@@ -14,69 +14,6 @@ BinTree::BinTree(){
 
 }
 
-BinTree::BinTree(int ids[], string strings[]) {
-    /* this is NOT a correct constructor,
-     * you CANNOT use this assignments
-     * *****************
-     * this is an alternate constructor for demonstration
-     * purposes only. This builds a hard coded tree
-     * based on the known test data. It is simply for
-     * demonstration and proving displayInOrder traversal.
-     */
-    count = 0; 
-
-    root = new DataNode;
-    root->left = nullptr;
-    root->right = nullptr;
-    root->data.id = ids[0];
-    root->data.information = strings[0];
-    count++;
-
-    root->left = new DataNode;
-    root->left->left = nullptr;
-    root->left->right = nullptr;
-    root->left->data.id = ids[1];
-    root->left->data.information = strings[1];
-    count++;
-
-    root->right = new DataNode;
-    root->right->left = nullptr;
-    root->right->right = nullptr;
-    root->right->data.id = ids[2];
-    root->right->data.information = strings[2];
-    count++;
-
-    root->left->right = new DataNode;
-    root->left->right->left = nullptr;
-    root->left->right->right = nullptr;
-    root->left->right->data.id = ids[3];
-    root->left->right->data.information = strings[3];
-    count++;
-    
-    root->left->left = new DataNode;
-    root->left->left->left = nullptr;
-    root->left->left->right = nullptr;
-    root->left->left->data.id = ids[4];
-    root->left->left->data.information = strings[4];
-    count++;
-    
-    root->left->right->right = new DataNode;
-    root->left->right->right->left = nullptr;
-    root->left->right->right->right = nullptr;
-    root->left->right->right->data.id = ids[5];
-    root->left->right->right->data.information = strings[5];
-    count++;
-    
-    root->left->right->left = new DataNode;
-    root->left->right->left->left = nullptr;
-    root->left->right->left->right = nullptr;
-    root->left->right->left->data.id = ids[6];
-    root->left->right->left->data.information = strings[6];
-    count++;
-
-    return;
-}
-
 BinTree::~BinTree(){
     clear(root);
 }
