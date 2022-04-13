@@ -69,7 +69,15 @@ int BinTree::getHeight(DataNode* localRoot){
 }
 
 void BinTree::displayPreOrder(DataNode* localRoot){
-
+    if(localRoot){
+        cout << localRoot->data.id << " " << localRoot->data.information << endl;
+        if(localRoot->left){
+            displayPreOrder(localRoot->left);
+        }
+        if(localRoot->right){
+            displayPreOrder(localRoot->right);
+        }
+    }
 }
 
 void BinTree::displayInOrder(DataNode* localRoot){
@@ -85,7 +93,15 @@ void BinTree::displayInOrder(DataNode* localRoot){
 }
 
 void BinTree::displayPostOrder(DataNode* localRoot){
-
+    if(localRoot){
+        if(localRoot->left){
+            displayPostOrder(localRoot->left);
+        }
+        if(localRoot->right){
+            displayPostOrder(localRoot->right);
+        }
+        cout << localRoot->data.id << " " << localRoot->data.information << endl;
+    }
 }
 
 DataNode* BinTree::minValueNode(DataNode* node){
@@ -122,7 +138,27 @@ bool BinTree::getRootData(Data* emptyData){
 }
 
 void BinTree::displayTree(){
+    cout << "DISPLAY TREE" << endl;
+    cout << "==============================================" << endl;
+    if(isEmpty()){
+        cout << "Tree is empty" << endl;
+    }else{
+        cout << "Tree is NOT empty" << endl;
+    }
+    cout << "Height " << getHeight(root) << endl;
+    cout << "Node Count: " << getCount() << endl << endl;
+    cout << "Pre-Order Traversal" << endl;
+    displayPreOrder(root);
+    cout << endl;
 
+    cout << "In-Order Traversal" << endl;
+    displayInOrder(root);
+    cout << endl;
+
+    cout << "Post-Order Traversal" << endl;
+    displayPostOrder(root);
+    cout << endl;
+    cout << "==============================================" << endl << endl;
 }
 
 void BinTree::clear(){
@@ -166,7 +202,11 @@ int BinTree::getHeight(){
 }
 
 void BinTree::displayPreOrder(){
-
+    if(root){
+        displayPreOrder(root);
+    }else{
+        cout << "Tree is empty" << endl;
+    }
 }
 
 void BinTree::displayInOrder(){
@@ -179,5 +219,9 @@ void BinTree::displayInOrder(){
 }
 
 void BinTree::displayPostOrder(){
-
+    if(root){
+        displayPostOrder(root);
+    }else{
+        cout << "Tree is empty" << endl;
+    }
 }
