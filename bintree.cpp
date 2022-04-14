@@ -61,6 +61,19 @@ bool BinTree::getNode(Data* dataBox, int id, DataNode* localRoot){
 
 bool BinTree::contains(int id, DataNode* localRoot){
     bool found = false;
+    if(localRoot){
+        if(id == localRoot->data.id){
+            found = true;
+        }else if(id < localRoot->data.id){
+            if(contains(id, localRoot->left)){
+                found = true;
+            }
+        }else if(id > localRoot->data.id){
+            if(contains(id, localRoot->right)){
+                found = true;
+            }
+        }
+    }
     return found; 
 }
 
@@ -194,6 +207,9 @@ bool BinTree::getNode(Data* dataBox, int id){
 
 bool BinTree::contains(int id){
     bool found = false;
+    if(id > 0){
+        found = contains(id, root);
+    }
     return found; 
 }
 
