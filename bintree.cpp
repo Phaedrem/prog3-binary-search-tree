@@ -56,6 +56,23 @@ DataNode* BinTree::removeNode(int id, DataNode* localRoot){
 
 bool BinTree::getNode(Data* dataBox, int id, DataNode* localRoot){
     bool found = false;
+    dataBox->id = -1;
+    dataBox->information = "";
+    if(localRoot){
+        if(id == localRoot->data.id){
+            dataBox->id = localRoot->data.id;
+            dataBox->information = localRoot->data.information;
+            found = true;
+        }else if(id < localRoot->data.id){
+            if(getNode(dataBox, id, localRoot->left)){
+                found = true;
+            }
+        }else if(id > localRoot->data.id){
+            if(getNode(dataBox, id, localRoot->right)){
+                found = true;
+            }
+        }
+    }
     return found;
 }
 
@@ -202,6 +219,9 @@ bool BinTree::removeNode(int id){
 
 bool BinTree::getNode(Data* dataBox, int id){
     bool found = false;
+    if(id > 0){
+        found = getNode(dataBox, id, root);
+    }
     return found;
 }
 
