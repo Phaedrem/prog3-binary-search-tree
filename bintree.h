@@ -8,10 +8,12 @@ Purpose: Creating a Binary Search Tree to work struct Data and  Struct Node
 #define BINTREE_BINTREE_H
 
 #include <iostream>
+#include <algorithm>
 #include "data.h"
 
 using std::cout;
 using std::endl;
+using std::max;
 
 class BinTree {
 
