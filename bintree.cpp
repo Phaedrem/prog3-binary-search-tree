@@ -42,16 +42,45 @@ bool BinTree::addNode(DataNode* newNode, DataNode** localRoot){
         added = true;
     }else{
         if(newNode->data.id < (*localRoot)->data.id){
-            addNode(newNode, &(*localRoot)->left);
+            if(addNode(newNode, &(*localRoot)->left)){
+                added = true;
+            }
         }else if(newNode->data.id > (*localRoot)->data.id){
-            addNode(newNode, &(*localRoot)->right);
+            if(addNode(newNode, &(*localRoot)->right)){
+                added = true;
+            }
         }
     }
     return added;
 }
 
 DataNode* BinTree::removeNode(int id, DataNode* localRoot){
-    return 0;
+    if(localRoot){
+       if(id < localRoot->data.id){
+           localRoot->left = removeNode(id, localRoot->left);
+       }else if(id > localRoot->data.id){
+           localRoot->right = removeNode(id, localRoot->right);
+       }else{
+           DataNode *temp;
+           if(!localRoot->left){
+               temp = localRoot->right;
+               delete localRoot;
+               localRoot = temp;
+               count--;
+           }else if(!localRoot->right){
+               temp = localRoot->left;
+               delete localRoot;
+               localRoot = temp;
+               count--;
+           }else{
+               temp = minValueNode(localRoot->right);
+               localRoot->data.id = temp->data.id;
+               localRoot->data.information = temp->data.information;
+               localRoot->right = removeNode(temp->data.id, localRoot->right);
+           }
+       }
+    }
+    return localRoot;
 }
 
 bool BinTree::getNode(Data* dataBox, int id, DataNode* localRoot){
@@ -220,7 +249,9 @@ bool BinTree::addNode(int id, const string* info){
 }
 
 bool BinTree::removeNode(int id){
-    return 0;
+    int tempCount = count;
+    root = removeNode(id, root);
+    return tempCount > count;
 }
 
 bool BinTree::getNode(Data* dataBox, int id){
