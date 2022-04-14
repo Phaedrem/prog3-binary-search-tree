@@ -11,7 +11,8 @@ CONSTRUCTORS / DESTRUCTORS
 *********************************/
 
 BinTree::BinTree(){
-
+    root = nullptr;
+    count = 0;  
 }
 
 BinTree::~BinTree(){
